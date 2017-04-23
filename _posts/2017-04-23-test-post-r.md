@@ -1,8 +1,8 @@
-# How to read WOS (Web of Science) into R?
-MarioGS  
-April 22, 2017  
-
-
+---
+layout: post
+title: "How to read WOS (Web of Science) into R?"
+date: 2017--04--23
+---
 
 ## R Markdown
 
