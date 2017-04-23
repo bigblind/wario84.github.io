@@ -37,7 +37,7 @@ If we would like plot the change of miles per gallon,`mpg`, in the vertical axis
 plot(x=mtcars$cyl, y=mtcars$mpg)
 ```
 
-![](assets/img/plot-base-1.png)<!-- -->
+![](https://github.com/Wario84/wario84.github.io/blob/master/assets/img/plot-1.png)<!-- -->
 
 This plot is already informative, we can easily see that as the number of `cylinders` in the engine increases in the horizontal axis, the efficiency measured by `miles per gallon` reduces. However, visually it might not be so appealing. 
 
@@ -57,7 +57,7 @@ Next, lets plot again `mpg` versus `cyl`.
 ggplot(mtcars, aes(x=cyl,y=mpg))+geom_point()
 ```
 
-![](assets/img/ggplot1-1.png)<!-- -->
+![](~/assets/img/ggplot1-1.png)<!-- -->
 
 Notice, that `ggplot` is taking the data.frame `mtcars` as a first argument, then `cyl` is specified in the horizontal axis by the argument `x` and similarly for `mpg` in the vertical axis (`y`). Finally we can think of `geom_point()` as templates for different kinds of graphs. Here we will explore the most common ones.
 

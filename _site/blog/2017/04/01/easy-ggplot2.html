@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title> Mario, Gonzalez-Sauri</title>
+	<!-- link to main stylesheet -->
+		<link rel="stylesheet" type="text/css" href="/css/main.css">
+
+</head>
+<body>
+<nav>
+    		<ul>
+        		<li><a href="/">Home</a></li>
+	        	<li><a href="/about">About</a></li>
+        		<li><a href="/cv">Affiliation</a></li>
+        		<li><a href="/blog">Blog</a></li>
+    		</ul>
+		</nav>
+		<div class="container">
+			
+			<h1>Easy peasy plotting with ggplot2</h1>
+<p class="meta">01 Apr 2017</p>
+
+<div class="post">
+  <h2 id="introduction">Introduction</h2>
+
+<p><code class="highlighter-rouge">ggplot2</code> is an excellent alternative if you want to produce fast, colourful and elegant graphics. Very often we want to use graphics not only as an exploratory tool, but as part of a presentation, dissertation, paper, or even a blog like this. In order to achieve that, we would like to use tools that pay attention to the quality minimizing the coding and learning curve required to used them. <code class="highlighter-rouge">ggplot2</code> is an excellent example of such a tool.</p>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>For this script, we will be using the package <code class="highlighter-rouge">ggplot2</code> and the data.frame <code class="highlighter-rouge">mtcars</code> which is included in <code class="highlighter-rouge">R</code>.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">summary</span><span class="p">(</span><span class="n">mtcars</span><span class="p">[,</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">)])</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>##       mpg             cyl       
+##  Min.   :10.40   Min.   :4.000  
+##  1st Qu.:15.43   1st Qu.:4.000  
+##  Median :19.20   Median :6.000  
+##  Mean   :20.09   Mean   :6.188  
+##  3rd Qu.:22.80   3rd Qu.:8.000  
+##  Max.   :33.90   Max.   :8.000
+</code></pre>
+</div>
+
+<h2 id="plotting-with-the-base">Plotting with the base</h2>
+
+<p>If we would like plot the change of miles per gallon,<code class="highlighter-rouge">mpg</code>, in the vertical axis versus a number of cylinders, <code class="highlighter-rouge">cyl</code>. Using the <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/00Index.html">r-base</a>, we can use the <code class="highlighter-rouge">plot</code> command.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">mtcars</span><span class="o">$</span><span class="n">cyl</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="n">mtcars</span><span class="o">$</span><span class="n">mpg</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="https://github.com/Wario84/wario84.github.io/blob/master/assets/img/plot-1.png" alt="" /><!-- --></p>
+
+<p>This plot is already informative, we can easily see that as the number of <code class="highlighter-rouge">cylinders</code> in the engine increases in the horizontal axis, the efficiency measured by <code class="highlighter-rouge">miles per gallon</code> reduces. However, visually it might not be so appealing.</p>
+
+<h2 id="plotting-with-ggplot2">Plotting with <code class="highlighter-rouge">ggplot2</code></h2>
+
+<p>Let’s start by installing and loading the package into the environment.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"ggplo2"</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Next, lets plot again <code class="highlighter-rouge">mpg</code> versus <code class="highlighter-rouge">cyl</code>.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">cyl</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">mpg</span><span class="p">))</span><span class="o">+</span><span class="n">geom_point</span><span class="p">()</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="~/assets/img/ggplot1-1.png" alt="" /><!-- --></p>
+
+<p>Notice, that <code class="highlighter-rouge">ggplot</code> is taking the data.frame <code class="highlighter-rouge">mtcars</code> as a first argument, then <code class="highlighter-rouge">cyl</code> is specified in the horizontal axis by the argument <code class="highlighter-rouge">x</code> and similarly for <code class="highlighter-rouge">mpg</code> in the vertical axis (<code class="highlighter-rouge">y</code>). Finally we can think of <code class="highlighter-rouge">geom_point()</code> as templates for different kinds of graphs. Here we will explore the most common ones.</p>
+
+<p>Now lets add a color to differentiate the cars by <code class="highlighter-rouge">gear</code>.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">summary</span><span class="p">(</span><span class="n">mtcars</span><span class="o">$</span><span class="n">gear</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   3.000   3.000   4.000   3.688   4.000   5.000
+</code></pre>
+</div>
+<p>And plot again.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">mtcars</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">cyl</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">mpg</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="n">gear</span><span class="p">))</span><span class="o">+</span><span class="n">geom_point</span><span class="p">()</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="assets/img/ggplot2-1.png" alt="" /><!-- --></p>
+
+
+</div>
+
+
+
+			
+			</div><!-- /.container -->
+			<footer>
+	    		<ul>
+    		<li><a href="mailto:mglezsauri@gmail.com">email</a></li>
+    		<li><a href="https://github.com/Wario84/wario84.github.io">github.io/wario84</a></li>
+			</ul>
+		</footer>
+	</body>
+</html>
+
